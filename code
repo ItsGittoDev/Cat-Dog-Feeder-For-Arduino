@@ -1,0 +1,93 @@
+// This was made by ItsGitto! Please don't remove this, you would help a lot! Instead put something below.
+
+#include <LiquidCrystal.h>
+#include <Servo.h>
+
+Servo myservo;
+LiquidCrystal lcd(0, 1, 8, 9, 10, 11);
+signed short minutes, secondes;
+char timeline[16];
+int pos = 180;
+
+void setup() {
+
+  lcd.begin(16, 2);
+  lcd.print("...");
+  minutes = 0;
+  secondes = 10;
+  myservo.attach(12);
+  myservo.write(pos);
+   pinMode(13, OUTPUT);
+    digitalWrite(13, HIGH);
+   delay(500);
+   lcd.clear();
+   lcd.print("Made by:");
+   lcd.setCursor(0, 1);
+   lcd.print("ItsGitto"); // Please dont remove this because these are credits, you can add you instead using the same code
+   delay(2000);
+   lcd.clear();
+   lcd.setCursor(0, 0);
+   lcd.print("Loading");
+   lcd.setCursor(0, 1);
+   lcd.print("[]");
+   delay(500);
+    lcd.print("[]");
+   delay(500);
+    lcd.print("[]");
+   delay(500);
+    lcd.print("[]");
+   delay(500);
+    lcd.print("[]");
+   delay(500);
+    lcd.print("[]");
+   delay(500);
+    lcd.print("[]");
+   delay(500);
+    lcd.print("[]");
+   delay(2000);
+   lcd.clear();
+   lcd.print("Fedding Miu in:");
+}
+
+void loop() {
+
+  lcd.setCursor(0, 1);
+  sprintf(timeline,"%0.2d:%0.2d", minutes, secondes);
+  lcd.print(timeline);
+  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+  
+  delay(1000);
+  secondes--;
+  
+  
+  if (secondes == 0 and minutes == 0)
+  { 
+    lcd.clear();
+    lcd.print("Feeding...");
+    delay(1000);
+    for (pos = 180; pos >= 0; pos -= 5) { // goes from 0 degrees to 180 degrees
+    // in steps of 1 degree
+    myservo.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(5);                       // waits 15 ms for the servo to reach the position
+  }
+  for (pos = 0; pos <= 180; pos += 5) { // goes from 180 degrees to 0 degrees
+    myservo.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(10);                       // waits 15 ms for the servo to reach the position
+  }
+    lcd.clear();
+    delay(5);
+    lcd.print("Miu feeded! ^-^");
+    delay(2000);
+    lcd.clear();
+    lcd.print("Fedding Miu in:");
+    lcd.setCursor(0, 1);
+     minutes = 240;
+  }
+
+{
+if (secondes == 0)
+  { 
+   secondes = 60;
+   minutes--;
+  }
+}}
